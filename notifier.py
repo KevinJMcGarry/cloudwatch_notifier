@@ -55,4 +55,9 @@ sg.authorize_ingress(IpPermissions=[{'FromPort': 80, 'ToPort': 80, 'IpProtocol':
 
 
 
+# AutoScaling Related
+as_client = session.client('autoscaling')
+as_client.describe_auto_scaling_groups()  # get a list of ASGs for this region
+as_client.describe_auto_scaling_groups(AutoScalingGroupNames=['Notifier_ASG'])
+as_client.execute_policy(AutoScalingGroupName='Notifier_ASG', PolicyName='Scale Out')
 
