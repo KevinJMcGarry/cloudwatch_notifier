@@ -1,6 +1,7 @@
 import boto3
 import os
 import stat
+import requests
 
 session = boto3.Session(profile_name='eureka-terraform', region_name='us-east-1')
 ec2 = session.resource('ec2')

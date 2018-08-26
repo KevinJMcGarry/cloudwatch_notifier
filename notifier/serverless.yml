@@ -17,14 +17,18 @@ service: notifier # NOTE: update this with your service name
 # Check out our docs for more details
 # frameworkVersion: "=X.X.X"
 
+# values provided from config file
 provider:
   name: aws
   runtime: python3.6
-  profile: eureka-terraform
+  profile: ${file(../config.${self:provider.stage}.json):notifier.profile}  # stage is set below, default is dev
+  # profile: "eureka-terraform"
   region: us-east-1
+  environment:
+    SLACK_WEBHOOK_URL: ${file(../config.${self:provider.stage}.json):notifier.slack_webhook_url}
 
 # you can overwrite defaults here
-#  stage: dev
+stage: "dev"
 #  region: us-east-1
 
 # you can add statements to the Lambda function's IAM Role here
@@ -57,8 +61,8 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  hello:
-    handler: handler.hello
+  post-to-slack:
+    handler: handler.post_to_slack
     events:
       - cloudwatchEvent:
           event:
