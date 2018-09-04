@@ -1,9 +1,8 @@
 # AWS Automation - Cloud Watch Events Notifier
 
 ## Notifier
-Project to notify Slack users of changes to your AWS account resources using Cloudwatch Events
+Project that uses CloudWatch Events with Lambda to notify Slack users of changes to your AWS account resources.
 
 ### Features
-Notifier currently has the following features:
-
-- 
+Currently targeted to AutoScaling Group events.
+You can easily target other AWS resources and their events via the serverless.yml config file.
